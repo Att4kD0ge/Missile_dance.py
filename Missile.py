@@ -4,10 +4,14 @@ import pygame
 class Missile:
     def __init__(self, speed, image_path, start_pos):
         self.speed = speed
-        self.image = pygame.image.load("Sprites/bomb.png")
+        self.image_variant = image_path
+        if self.image_variant == 1:
+            timg = pygame.image.load("Sprites/bomb.png")
+            self.image = pygame.transform.scale(timg, (30, 30))
         self.rect = self.image.get_rect()
         self.rect.center = start_pos
         self.exploded = False
+
 
     def move(self):
         self.rect.move_ip(0, self.speed)

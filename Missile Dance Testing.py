@@ -44,6 +44,7 @@ missile_rect = missile_image.get_rect()
 window_height = 800
 window_width = 800
 initalmissile = 0
+missiles = []
 
 
 start = Button(
@@ -55,7 +56,7 @@ start = Button(
 #Functions
 
 
-def spawn_missile():
+def update_missile():
 
     global missile_rect
     global missile_spawn_timer
@@ -97,8 +98,12 @@ def draw_screen():
 def update_screen():
     screen.blit(Background, (0, 0))
     activate_player()
-    spawn_missile()
-
+    for i in range(3):
+        missile = Missile(10, 1, (i * 200 + 100, 400))
+        screen.blit(missile.image, missile.rect.center)
+        missiles.append(missile)
+    Missile.follow_player()
+    Missile.check_collision()
     pygame.display.update()
 
 
@@ -117,10 +122,7 @@ def activate_player():
 
 
 
-missiles = []
-for i in range(3):
-    missile = Missile(10, "missile.png", (i*200+100, 0))
-    missiles.append(missile)
+
 
 
 
